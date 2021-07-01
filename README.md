@@ -66,13 +66,13 @@ repositories {
         waterWaveView.setShapePadding(10F)
         waterWaveView.setAnimationSpeed(10)
         
-        ###### waterWaveView listener
+   ```
+   
+   ###### waterWaveView listener
         
         waterWaveView.setListener { progress, max ->
          Toast.makeText(this, "Progress: $progress, Max: $max", Toast.LENGTH_SHORT).show()
         }
-        
-   ```
    
  # Attributes
    
