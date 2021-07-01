@@ -44,5 +44,6 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
 
     // Circular Water Wave Animation library
+//    implementation 'com.github.orbitalsonic:Water-Wave-Animation-Android:1.0.0'
     implementation project(":waterwave")
 }
