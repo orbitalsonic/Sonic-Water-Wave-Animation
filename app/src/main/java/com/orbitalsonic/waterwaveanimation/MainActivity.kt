@@ -35,7 +35,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun onClickListenerMethod() {
         waterWaveView.setListener { progress, max ->
-//            showMessage("Progress: $progress, Max: $max")
+            showMessage("Progress: $progress, Max: $max")
         }
 
         addWaterLevel.setOnClickListener {
