@@ -52,6 +52,7 @@ repositories {
  # Java or Kotlin
  
   ```
+        var waterWaveView: WaterWaveView = findViewById(R.id.waterWaveView)
         waterWaveView.setShape(WaterWaveView.Shape.CIRCLE)
         waterWaveView.setHideText(false)
         waterWaveView.setTextColor(Color.parseColor("#018786"))
@@ -64,6 +65,13 @@ repositories {
         waterWaveView.setWaveStrong(100)
         waterWaveView.setShapePadding(10F)
         waterWaveView.setAnimationSpeed(10)
+        
+        ###### waterWaveView listener
+        
+        waterWaveView.setListener { progress, max ->
+         Toast.makeText(this, "Progress: $progress, Max: $max", Toast.LENGTH_SHORT).show()
+        }
+        
    ```
    
  # Attributes
