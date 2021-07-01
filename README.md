@@ -107,5 +107,7 @@ setShapePadding(float padding)      void
 setWaveStrong(int strong)           void
 ```
 
+# Screenshots
 
+![alt text](https://github.com/orbitalsonic/Water-Wave-Animation-Android/blob/master/Screenshots/screengif.gif?raw=true)
  
