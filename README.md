@@ -52,7 +52,7 @@ repositories {
  # Java or Kotlin
  
   ```
-  waterWaveView.setShape(WaterWaveView.Shape.CIRCLE)
+        waterWaveView.setShape(WaterWaveView.Shape.CIRCLE)
         waterWaveView.setHideText(false)
         waterWaveView.setTextColor(Color.parseColor("#018786"))
         waterWaveView.setFrontWaveColor(Color.parseColor("#80c5fc"))
@@ -69,24 +69,25 @@ repositories {
  # Attributes
    
 ```
-max	Integer
-progress	Integer	
-frontColor	color	
-behideColor	color
-borderColor	color
-textColor	color
-borderWidthSize	Dimension
-strong	Integer
-animatorEnable	boolean
-shapeType	enum
-textHidden	boolean
-shapePadding	Dimension
+max	"Integer"
+progress	"Integer"	
+frontColor	"color"	
+behideColor	"color"
+borderColor	"color"
+textColor	"color"
+borderWidthSize	"Dimension"
+strong	"Integer"
+animatorEnable	"boolean"
+shapeType	"enum"
+textHidden	"boolean"
+shapePadding	"Dimension"
 
 ```
  
  # Methods
  
- startAnimation()	void
+ ```
+startAnimation()	void
 stopAnimation()	void
 setWaveVector(float offset)
 setWaveOffset(int offset)	void
@@ -96,6 +97,7 @@ setStarSpikes(int count)	void
 setBorderWidth(float width)	void
 setShapePadding(float padding)	void
 setWaveStrong(int strong)	void
+```
 
 
  
