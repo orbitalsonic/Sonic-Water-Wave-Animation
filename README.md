@@ -69,34 +69,34 @@ repositories {
  # Attributes
    
 ```
-max	"Integer"
-progress	"Integer"	
-frontColor	"color"	
-behideColor	"color"
-borderColor	"color"
-textColor	"color"
-borderWidthSize	"Dimension"
-strong	"Integer"
-animatorEnable	"boolean"
-shapeType	"enum"
-textHidden	"boolean"
-shapePadding	"Dimension"
+max	                    "Integer"
+progress	            "Integer"	
+frontColor	            "color"	
+behideColor	            "color"
+borderColor	            "color"
+textColor	            "color"
+borderWidthSize	        "Dimension"
+strong	                "Integer"
+animatorEnable	        "boolean"
+shapeType	            "enum"
+textHidden	            "boolean"
+shapePadding	        "Dimension"
 
 ```
  
  # Methods
  
  ```
-startAnimation()	void
-stopAnimation()	void
-setWaveVector(float offset)
-setWaveOffset(int offset)	void
-setShape(Shape shape)	void
-setHideText(boolean hidden)	void
-setStarSpikes(int count)	void
-setBorderWidth(float width)	void
-setShapePadding(float padding)	void
-setWaveStrong(int strong)	void
+startAnimation()	                void
+stopAnimation()	                    void
+setWaveVector(float offset)         void
+setWaveOffset(int offset)	        void
+setShape(Shape shape)	            void
+setHideText(boolean hidden)	        void
+setStarSpikes(int count)	        void
+setBorderWidth(float width)	        void
+setShapePadding(float padding)	    void
+setWaveStrong(int strong)	        void
 ```
 
 
