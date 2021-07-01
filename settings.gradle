@@ -1,0 +1,3 @@
+rootProject.name = "Water Wave Animation"
+include ':app'
+include ':waterwave'
