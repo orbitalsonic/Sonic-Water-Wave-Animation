@@ -32,8 +32,7 @@ public class WaterWaveView extends View {
         SQUARE(6),
         RECTANGLE(7),
         TRIANGLE(8),
-        DIAMOND(9),
-        BOTTLE(10),
+        DIAMOND(9)
         ;
 
         int value;
