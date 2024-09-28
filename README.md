@@ -6,7 +6,7 @@ The **Sonic Water Wave Animation** library provides an engaging and visually app
 
 ## Features
 
-- **Custom Shapes**: Choose from Circle, Water Drop, Glass, Heart, Star, Square, Rectangle, Triangle and Diamond shapes for the wave animation.
+- **Custom Shapes**: Choose multiple shapes for the wave animation.
 - **Wave Properties**: Customize colors, wave strength, and progress levels.
 - **Text Overlay**: Display text with customizable colors and hide/show options.
 - **Border and Padding**: Add borders and adjust padding for better UI control.
