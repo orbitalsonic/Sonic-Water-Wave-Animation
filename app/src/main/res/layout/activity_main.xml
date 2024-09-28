@@ -4,70 +4,118 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#f5f6fb"
     tools:context=".MainActivity">
 
-    <com.google.android.material.button.MaterialButtonToggleGroup
-        android:id="@+id/toggleButtonGroupIcon"
-        android:layout_width="wrap_content"
+    <HorizontalScrollView
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:singleSelection="true"
+        android:orientation="horizontal"
+        app:layout_constraintWidth_percent="0.9"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toTopOf="@+id/waterWaveView"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         >
+        <com.google.android.material.button.MaterialButtonToggleGroup
+            android:id="@+id/toggleButtonGroupIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:singleSelection="true"
+            >
 
-        <Button
-            android:id="@+id/btnCircle"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            style="@style/ToggleButtonWithOnlyIcon"
-            app:icon="@drawable/ic_baseline_circle_24"
-            />
+            <Button
+                android:id="@+id/btnCircle"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                style="@style/ToggleButtonWithOnlyIcon"
+                app:icon="@drawable/ic_baseline_circle_24"
+                />
 
-        <Button
-            android:id="@+id/btnSquare"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            style="@style/ToggleButtonWithOnlyIcon"
-            app:icon="@drawable/ic_baseline_square_24"
-            />
+            <Button
+                android:id="@+id/btnWaterDrop"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                style="@style/ToggleButtonWithOnlyIcon"
+                app:icon="@drawable/ic_baseline_water_drop_24"
+                />
+            <Button
+                android:id="@+id/btnGlass"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                style="@style/ToggleButtonWithOnlyIcon"
+                app:icon="@drawable/ic_baseline_glass"
+                />
 
-        <Button
-            android:id="@+id/btnHeart"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            style="@style/ToggleButtonWithOnlyIcon"
-            app:icon="@drawable/ic_baseline_heart_24"
-            />
+            <Button
+                android:id="@+id/btnHeart"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                style="@style/ToggleButtonWithOnlyIcon"
+                app:icon="@drawable/ic_baseline_heart_24"
+                />
 
-        <Button
-            android:id="@+id/btnStar"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            style="@style/ToggleButtonWithOnlyIcon"
-            app:icon="@drawable/ic_baseline_star_24"
-            />
+            <Button
+                android:id="@+id/btnStar"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                style="@style/ToggleButtonWithOnlyIcon"
+                app:icon="@drawable/ic_baseline_star_24"
+                />
 
-    </com.google.android.material.button.MaterialButtonToggleGroup>
+            <Button
+                android:id="@+id/btnSquare"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                style="@style/ToggleButtonWithOnlyIcon"
+                app:icon="@drawable/ic_baseline_square_24"
+                />
+
+            <Button
+                android:id="@+id/btnRectangle"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                style="@style/ToggleButtonWithOnlyIcon"
+                app:icon="@drawable/ic_baseline_rectangle_24"
+                />
+            <Button
+                android:id="@+id/btnTriangle"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                style="@style/ToggleButtonWithOnlyIcon"
+                app:icon="@drawable/ic_baseline_triangle_24"
+                />
+            <Button
+                android:id="@+id/btnDiamond"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                style="@style/ToggleButtonWithOnlyIcon"
+                app:icon="@drawable/ic_baseline_diamond_24"
+                />
+
+
+
+        </com.google.android.material.button.MaterialButtonToggleGroup>
+
+    </HorizontalScrollView>
+
 
     <com.orbitalsonic.waterwave.WaterWaveView
         android:id="@+id/waterWaveView"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
         app:animatorEnable="true"
         app:textHidden="false"
         app:shapeType="circle"
         app:frontColor="#80c5fc"
         app:behideColor="#90cbf9"
-        app:borderColor="#000000"
+        app:borderColor="#2196F3"
         app:borderWidthSize="4dp"
         app:textColor="#018786"
         app:max="100"
         app:progress="30"
         app:strong="100"
         app:shapePadding="10dp"
+        app:layout_constraintWidth_percent="0.9"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -77,30 +125,31 @@
         android:id="@+id/removeWaterLevel"
         android:layout_width="0dp"
         android:layout_height="60dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/addWaterLevel"
-        app:layout_constraintTop_toBottomOf="@+id/waterWaveView"
         android:src="@drawable/ic_baseline_minus_24"
         android:background="@color/teal_700"
-        android:layout_marginStart="10dp"
+        android:layout_marginStart="15dp"
         android:layout_marginEnd="10dp"
-        android:layout_marginTop="30dp"
-        app:tint="@color/white" />
+        android:layout_marginBottom="30dp"
+        app:tint="@color/white"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/addWaterLevel"
+        app:layout_constraintBottom_toBottomOf="parent"/>
 
     <ImageButton
         android:id="@+id/addWaterLevel"
         android:layout_width="0dp"
         android:layout_height="60dp"
-        app:layout_constraintStart_toEndOf="@+id/removeWaterLevel"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/waterWaveView"
-        app:layout_constraintHorizontal_chainStyle="spread"
         android:src="@drawable/ic_baseline_add_24"
         android:background="@color/teal_700"
         android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginTop="30dp"
-        app:tint="@color/white" />
+        android:layout_marginEnd="15dp"
+        android:layout_marginBottom="30dp"
+        app:tint="@color/white"
+        app:layout_constraintStart_toEndOf="@+id/removeWaterLevel"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        />
 
 
 

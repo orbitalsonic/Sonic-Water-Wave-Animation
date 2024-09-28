@@ -1,10 +1,10 @@
 package com.orbitalsonic.waterwaveanimation
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.ImageButton
-import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.button.MaterialButtonToggleGroup
 import com.orbitalsonic.waterwave.WaterWaveView
 
@@ -35,7 +35,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun onClickListenerMethod() {
         waterWaveView.setListener { progress, max ->
-            showMessage("Progress: $progress, Max: $max")
+            printLog("Progress: $progress, Max: $max")
         }
 
         addWaterLevel.setOnClickListener {
@@ -61,9 +61,14 @@ class MainActivity : AppCompatActivity() {
             if (isChecked) {
                 when (checkedId) {
                     R.id.btnCircle -> waterWaveView.setShape(WaterWaveView.Shape.CIRCLE)
-                    R.id.btnSquare -> waterWaveView.setShape(WaterWaveView.Shape.SQUARE)
+                    R.id.btnWaterDrop -> waterWaveView.setShape(WaterWaveView.Shape.WATER_DROP)
+                    R.id.btnGlass -> waterWaveView.setShape(WaterWaveView.Shape.GLASS)
                     R.id.btnHeart -> waterWaveView.setShape(WaterWaveView.Shape.HEART)
                     R.id.btnStar -> waterWaveView.setShape(WaterWaveView.Shape.STAR)
+                    R.id.btnSquare -> waterWaveView.setShape(WaterWaveView.Shape.SQUARE)
+                    R.id.btnRectangle -> waterWaveView.setShape(WaterWaveView.Shape.RECTANGLE)
+                    R.id.btnTriangle -> waterWaveView.setShape(WaterWaveView.Shape.TRIANGLE)
+                    R.id.btnDiamond -> waterWaveView.setShape(WaterWaveView.Shape.DIAMOND)
                 }
             } else {
                 if (toggleGroup.checkedButtonId == View.NO_ID) {
@@ -74,8 +79,8 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    private fun showMessage(message: String) {
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+    private fun printLog(message: String) {
+        Log.d("SonicWaterWaveTAG", message)
     }
 
 }

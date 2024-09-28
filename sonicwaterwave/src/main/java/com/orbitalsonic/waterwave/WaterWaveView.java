@@ -17,14 +17,25 @@ import android.os.Message;
 import android.text.TextPaint;
 import android.util.AttributeSet;
 import android.view.View;
-
 import java.lang.ref.WeakReference;
 import java.util.Locale;
 
 public class WaterWaveView extends View {
     /*Type constant*/
+
     public enum Shape {
-        CIRCLE(1), SQUARE(2), HEART(3), STAR(4);
+        CIRCLE(1),
+        WATER_DROP(2),
+        GLASS(3),
+        HEART(4),
+        STAR(5),
+        SQUARE(6),
+        RECTANGLE(7),
+        TRIANGLE(8),
+        DIAMOND(9),
+        BOTTLE(10),
+        ;
+
         int value;
 
         Shape(int value) {
@@ -36,8 +47,10 @@ public class WaterWaveView extends View {
                 if (shape.value == value) return shape;
             }
             return CIRCLE;
+
         }
     }
+
 
 
     /*Displacement Animator*/
@@ -369,29 +382,55 @@ public class WaterWaveView extends View {
         int radius = Math.min(screenSize.x, screenSize.y);
         int cx = (screenSize.x - radius) / 2;
         int cy = (screenSize.y - radius) / 2;
+
         switch (mShape) {
             case STAR:
-                /*===Star path===*/
-                mPathBorder = drawStart(radius / 2 + cx, radius / 2 + cy + (int) mBorderWidth, mSpikes, radius / 2 - (int) mBorderWidth, radius / 4);
-                mPathContent = drawStart(radius / 2 + cx, radius / 2 + cy + (int) mBorderWidth, mSpikes, radius / 2 - (int) mBorderWidth - (int) mShapePadding, radius / 4 - (int) mShapePadding);
+                mPathBorder = drawStar(radius / 2 + cx, radius / 2 + cy, mSpikes, radius / 2 - (int) mBorderWidth, radius / 4);
+                mPathContent = drawStar(radius / 2 + cx, radius / 2 + cy, mSpikes, radius / 2 - (int) mBorderWidth - (int) mShapePadding, radius / 4 - (int) mShapePadding);
                 break;
             case HEART:
-                /*===Love path===*/
                 mPathBorder = drawHeart(cx, cy, radius);
                 mPathContent = drawHeart(cx + ((int) mShapePadding / 2), cy + ((int) mShapePadding / 2), radius - (int) mShapePadding);
                 break;
             case CIRCLE:
-                /*===Circular path===*/
                 mPathBorder = drawCircle(cx, cy, radius);
                 mPathContent = drawCircle(cx + ((int) mShapePadding / 2), cy + ((int) mShapePadding / 2), radius - (int) mShapePadding);
                 break;
             case SQUARE:
-                /*===Square path===*/
                 mPathBorder = drawSquare(cx, cy, radius);
                 mPathContent = drawSquare(cx + ((int) mShapePadding / 2), cy + ((int) mShapePadding / 2), radius - (int) mShapePadding);
                 break;
-        }
+            case RECTANGLE:
+                int rectWidth = screenSize.x - (int) mShapePadding;
+                int rectHeight = screenSize.y - (int) mShapePadding;
+                mPathBorder = drawRectangle(cx, cy, rectWidth, rectHeight);
+                mPathContent = drawRectangle(cx + (int) mBorderWidth, cy + (int) mBorderWidth, rectWidth - 2 * (int) mBorderWidth, rectHeight - 2 * (int) mBorderWidth);
+                break;
+            case TRIANGLE:
+                int triWidth = screenSize.x - (int) mShapePadding;
+                int triHeight = screenSize.y - (int) mShapePadding;
+                mPathBorder = drawTriangle(cx, cy, triWidth, triHeight);
+                mPathContent = drawTriangle(cx + (int) mBorderWidth, cy + (int) mBorderWidth, triWidth - 2 * (int) mBorderWidth, triHeight - 2 * (int) mBorderWidth);
+                break;
+            case DIAMOND:
+                int diaWidth = screenSize.x - (int) mShapePadding;
+                int diaHeight = screenSize.y - (int) mShapePadding;
+                mPathBorder = drawDiamond(cx, cy, diaWidth, diaHeight);
+                mPathContent = drawDiamond(cx + (int) mBorderWidth, cy + (int) mBorderWidth, diaWidth - 2 * (int) mBorderWidth, diaHeight - 2 * (int) mBorderWidth);
+                break;
+            case WATER_DROP:
+                int dropSize = Math.min(screenSize.x, screenSize.y) - (int) mShapePadding;
+                mPathBorder = drawWaterDrop(cx, cy, dropSize);
+                mPathContent = drawWaterDrop(cx + (int) mBorderWidth, cy + (int) mBorderWidth, dropSize - 2 * (int) mBorderWidth);
+                break;
+            case GLASS:
+                int glassWidth = screenSize.x - (int) mShapePadding;
+                int glassHeight = screenSize.y - (int) mShapePadding;
+                mPathBorder = drawGlass(cx, cy, glassWidth, glassHeight);
+                mPathContent = drawGlass(cx + (int) mBorderWidth, cy + (int) mBorderWidth, glassWidth - 2 * (int) mBorderWidth, glassHeight - 2 * (int) mBorderWidth);
+                break;
 
+        }
 
         createShader();
         Message message = Message.obtain(uiHandler);
@@ -432,17 +471,7 @@ public class WaterWaveView extends View {
         return path;
     }
 
-    /**
-     * Draw stars
-     *
-     * @param cx          X
-     * @param cy          Y
-     * @param spikes      The number of angles of a star
-     * @param outerRadius Outer circle radius
-     * @param innerRadius Inner circle radius
-     * @return path
-     */
-    private Path drawStart(int cx, int cy, int spikes, int outerRadius, int innerRadius) {
+    private Path drawStar(int cx, int cy, int spikes, int outerRadius, int innerRadius) {
         Path path = new Path();
         double rot = Math.PI / 2d * 3d;
         double step = Math.PI / spikes;
@@ -456,6 +485,69 @@ public class WaterWaveView extends View {
             rot += step;
         }
         path.lineTo(cx, cy - outerRadius);
+        path.close();
+        return path;
+    }
+
+    private Path drawRectangle(int cx, int cy, int width, int height) {
+        Path path = new Path();
+        float left = cx + mBorderWidth / 2;
+        float top = cy + mBorderWidth / 2;
+        float right = cx + width - mBorderWidth / 2;
+        float bottom = cy + height - mBorderWidth / 2;
+        path.addRect(left, top, right, bottom, Path.Direction.CCW);
+        path.close();
+        return path;
+    }
+
+    private Path drawTriangle(int cx, int cy, int width, int height) {
+        Path path = new Path();
+        path.moveTo(cx + width / 2f, cy + mBorderWidth / 2); // Top vertex
+        path.lineTo(cx + mBorderWidth / 2, cy + height - mBorderWidth / 2); // Bottom left vertex
+        path.lineTo(cx + width - mBorderWidth / 2, cy + height - mBorderWidth / 2); // Bottom right vertex
+        path.close();
+        return path;
+    }
+
+    private Path drawDiamond(int cx, int cy, int width, int height) {
+        Path path = new Path();
+        float centerX = cx + width / 2f;
+        float centerY = cy + height / 2f;
+        path.moveTo(centerX, cy + mBorderWidth / 2); // Top vertex
+        path.lineTo(cx + width - mBorderWidth / 2, centerY); // Right vertex
+        path.lineTo(centerX, cy + height - mBorderWidth / 2); // Bottom vertex
+        path.lineTo(cx + mBorderWidth / 2, centerY); // Left vertex
+        path.close();
+        return path;
+    }
+
+    private Path drawWaterDrop(int cx, int cy, int size) {
+        Path path = new Path();
+        float halfSize = size / 2f;
+        float quarterSize = size / 4f;
+
+        path.moveTo(cx + halfSize, cy + mBorderWidth / 2); // Top point
+        path.cubicTo(cx + size - mBorderWidth / 2, cy + quarterSize, cx + size - mBorderWidth / 2, cy + size - mBorderWidth / 2, cx + halfSize, cy + size - mBorderWidth / 2); // Right curve
+        path.cubicTo(cx + mBorderWidth / 2, cy + size - mBorderWidth / 2, cx + mBorderWidth / 2, cy + quarterSize, cx + halfSize, cy + mBorderWidth / 2); // Left curve
+        path.close();
+        return path;
+    }
+
+    private Path drawGlass(int cx, int cy, int width, int height) {
+        Path path = new Path();
+        float topWidth = width * 0.8f;
+        float bottomWidth = width * 0.6f;
+
+        // Left side
+        path.moveTo(cx + (width - topWidth) / 2f, cy + mBorderWidth / 2); // Top left
+        path.lineTo(cx + (width - bottomWidth) / 2f, cy + height - mBorderWidth / 2); // Bottom left
+
+        // Bottom
+        path.lineTo(cx + (width + bottomWidth) / 2f, cy + height - mBorderWidth / 2); // Bottom right
+
+        // Right side
+        path.lineTo(cx + (width + topWidth) / 2f, cy + mBorderWidth / 2); // Top right
+
         path.close();
         return path;
     }

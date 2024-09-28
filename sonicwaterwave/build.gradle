@@ -1,20 +1,20 @@
 plugins {
-    id 'com.android.application'
+    id 'com.android.library'
     id 'kotlin-android'
 }
 
 android {
-    namespace 'com.orbitalsonic.waterwaveanimation'
+    namespace 'com.orbitalsonic.waterwave'
     compileSdk 34
 
     defaultConfig {
-        applicationId "com.orbitalsonic.waterwaveanimation"
         minSdkVersion 21
         targetSdkVersion 34
         versionCode 134
         versionName "11.134"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
     }
 
     buildTypes {
@@ -23,7 +23,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
-    compileOptions {
+      compileOptions {
         sourceCompatibility JavaVersion.VERSION_17
         targetCompatibility JavaVersion.VERSION_17
     }
@@ -37,8 +37,4 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'com.google.android.material:material:1.10.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
-
-    // Circular Water Wave Animation library
-//    implementation 'com.github.orbitalsonic:Water-Wave-Animation-Android:1.0.0'
-    implementation project(":sonicwaterwave")
 }

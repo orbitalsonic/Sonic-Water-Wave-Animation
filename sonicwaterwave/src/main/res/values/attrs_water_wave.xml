@@ -2,9 +2,14 @@
 <resources>
     <attr name="shapeType" format="enum">
         <enum name="circle" value="1" />
-        <enum name="square" value="2" />
-        <enum name="heart" value="3" />
-        <enum name="star" value="4" />
+        <enum name="water_drop" value="2" />
+        <enum name="glass" value="3" />
+        <enum name="heart" value="4" />
+        <enum name="star" value="5" />
+        <enum name="square" value="6" />
+        <enum name="rectangle" value="7" />
+        <enum name="triangle" value="8" />
+        <enum name="diamond" value="9" />
     </attr>
     <attr name="progress" format="integer" />
     <attr name="max" format="integer" />
