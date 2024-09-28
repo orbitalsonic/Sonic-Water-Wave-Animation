@@ -1,4 +1,5 @@
-[![](https://jitpack.io/v/orbitalsonic/Water-Wave-Animation-Android.svg)](https://jitpack.io/#orbitalsonic/Water-Wave-Animation-Android)
+[![](https://jitpack.io/v/orbitalsonic/Sonic-Water-Wave-Animation.svg)](https://jitpack.io/#orbitalsonic/Sonic-Water-Wave-Animation)
+
 # Water-Wave-Animation-Android
 
 Water Wave Animation is one of the most commonly used features in Android app. Using this Wave Animation makes the User Experience attractive. In this library, we are going to implement four shapes, Square, Heart, Start, and Circle.
@@ -19,7 +20,7 @@ repositories {
 ###### Add following dependency in app gradle file
 
 ```
- implementation 'com.github.orbitalsonic:Water-Wave-Animation-Android:1.0.0'
+ implementation 'com.github.orbitalsonic:Sonic-Water-Wave-Animation:2.0.1'
  
  ```
  
