@@ -26,7 +26,7 @@ repositories {
 }
 ```  
 ### Step 2: Add Dependencies
-In your app-level **build.gradle** file, add the library dependency. Use the latest version: [![](https://jitpack.io/v/orbitalsonic/Sonic-Water-Wave-Animation.svg)](https://jitpack.io/#orbitalsonic/Sonic-Water-Wave-Animation)
+In your app-level `build.gradle` file, add the library dependency. Use the latest version: [![](https://jitpack.io/v/orbitalsonic/Sonic-Water-Wave-Animation.svg)](https://jitpack.io/#orbitalsonic/Sonic-Water-Wave-Animation)
 ```
  implementation 'com.github.orbitalsonic:Sonic-Water-Wave-Animation:x.x.x'
 ```
