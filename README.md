@@ -2,145 +2,206 @@
 
 # Sonic Water Wave Animation
 
-The **Sonic Water Wave Animation** library provides an engaging and visually appealing wave animation effect for Android apps. This library supports various shapes, including **Circle**, **Water Drop**, **Glass**, **Heart**, **Star**, **Square**,  **Rectangle**, **Triangle**, and **Diamond**, making it easy to enhance your app’s user interface with smooth wave animations.
+**Android custom view** with an **animated water wave** inside **multiple clip shapes**. Tune colors, wave strength, motion, and shape—drop it into layouts or control it from Kotlin/Java.
+
+---
+
+## Preview
+
+> Add your own assets to the repo root (or `docs/`) and update the paths below.
+
+![Animated preview](preview.gif)
+
+![Shape grid preview](preview-shapes.png)
+
+---
 
 ## Features
 
-- **Custom Shapes**: Choose multiple shapes for the wave animation.
-- **Wave Properties**: Customize colors, wave strength, and progress levels.
-- **Text Overlay**: Display text with customizable colors and hide/show options.
-- **Border and Padding**: Add borders and adjust padding for better UI control.
-- **Easy Integration**: Add and configure the water wave animation with just a few lines of XML and code.
+- 🌊 **Animated water wave** — layered sine-style waves with optional motion
+- 🔷 **Multiple shapes** — circle, heart, star, glass, and more
+- 🎨 **Customizable colors** — front/back waves, border, and label
+- ⚡ **Smooth animation** — main-thread controller (no `HandlerThread`)
+- 🧩 **Easy integration** — XML attributes + simple API
+- 🎯 **Lightweight & performant** — path-based drawing (no per-frame bitmap shader)
+
+---
+
+## Available Shapes
+
+| Shape | XML `shapeType` |
+|-------|-----------------|
+| Circle | `circle` |
+| Water Drop | `water_drop` |
+| Glass | `glass` |
+| Heart | `heart` |
+| Star | `star` |
+| Square (rounded) | `square` |
+| Rectangle | `rectangle` |
+| Triangle | `triangle` |
+| Diamond | `diamond` |
+| Rounded Rectangle | `rounded_rectangle` |
+| Capsule | `capsule` |
+| Blob | `blob` |
+
+In code, use `com.orbitalsonic.waterwave.shape.ShapeType` (e.g. `ShapeType.HEART`) with `setShape(ShapeType)`.
+
+---
 
 ## Installation
 
-### Step 1: Add JitPack Repository
+### Option 1: Local module
 
-Add the following lines to your project's root `build.gradle` file:
+In your app `settings.gradle.kts` / `settings.gradle`:
 
+```gradle
+include ':app', ':sonicwaterwave'
 ```
-repositories {
-    google()
-    mavenCentral()
-    maven { url "https://jitpack.io" }
+
+In `app/build.gradle`:
+
+```gradle
+dependencies {
+    implementation project(':sonicwaterwave')
 }
-```  
-### Step 2: Add Dependencies
-In your app-level `build.gradle` file, add the library dependency. Use the latest version: [![](https://jitpack.io/v/orbitalsonic/Sonic-Water-Wave-Animation.svg)](https://jitpack.io/#orbitalsonic/Sonic-Water-Wave-Animation)
 ```
- implementation 'com.github.orbitalsonic:Sonic-Water-Wave-Animation:x.x.x'
+
+### Option 2: JitPack
+
+1. Add JitPack to your **root** `settings.gradle` (dependency resolution) or root `build.gradle` repositories.
+2. In **app** `build.gradle`:
+
+```gradle
+dependencies {
+    implementation 'com.github.orbitalsonic:Sonic-Water-Wave-Animation:<version>'
+}
 ```
+
+Replace `<version>` with a [JitPack tag or commit](https://jitpack.io/#orbitalsonic/Sonic-Water-Wave-Animation).
+
+---
 
 ## Usage
 
-### XML Layout Example
-To add the water wave animation in XML, use the following snippet:
+### Basic XML
 
-```
-<com.orbitalsonic.waterwave.WaterWaveView
+Recommended fully qualified class name:
+
+```xml
+<com.orbitalsonic.waterwave.view.WaterWaveView
     android:id="@+id/waterWaveView"
     android:layout_width="200dp"
     android:layout_height="200dp"
-    app:animatorEnable="true"
-    app:textHidden="false"
-    app:shapeType="circle"
-    app:frontColor="#80c5fc"
-    app:behindColor="#90cbf9"
-    app:borderColor="#000000"
-    app:borderWidthSize="4dp"
-    app:textColor="#018786"
     app:max="100"
-    app:progress="30"
-    app:strong="100"
-    app:shapePadding="10dp"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintTop_toTopOf="parent"
-    app:layout_constraintBottom_toBottomOf="parent"/>
+    app:progress="50"
+    app:shapeType="circle"
+    app:animatorEnable="true" />
 ```
 
-### Kotlin/Java Example
-You can configure and control the water wave view programmatically in your activity or fragment:
+`com.orbitalsonic.waterwave.WaterWaveView` is still supported as a thin compatibility subclass.
 
-```
-val waterWaveView: WaterWaveView = findViewById(R.id.waterWaveView)
+### Basic Kotlin
 
-waterWaveView.setShape(WaterWaveView.Shape.CIRCLE)
-waterWaveView.setHideText(false)
-waterWaveView.setTextColor(Color.parseColor("#018786"))
-waterWaveView.setFrontWaveColor(Color.parseColor("#80c5fc"))
-waterWaveView.setBehindWaveColor(Color.parseColor("#90cbf9"))
-waterWaveView.setBorderColor(Color.parseColor("#000000"))
-waterWaveView.setBorderWidth(4F)
-waterWaveView.max = 100
-waterWaveView.progress = 30
-waterWaveView.setWaveStrong(100)
-waterWaveView.setShapePadding(10F)
-waterWaveView.setAnimationSpeed(10)
-```
-### Adding a Listener
-You can listen to progress updates using the following listener:
+```kotlin
+import com.orbitalsonic.waterwave.view.WaterWaveView
+import com.orbitalsonic.waterwave.shape.ShapeType
 
+waterWaveView.setMax(100)
+waterWaveView.setProgress(50)
+waterWaveView.setShape(ShapeType.CIRCLE)
+waterWaveView.startAnimation()
 ```
+
+```kotlin
 waterWaveView.setListener { progress, max ->
-    Toast.makeText(this, "Progress: $progress, Max: $max", Toast.LENGTH_SHORT).show()
+    // react to progress changes
 }
 ```
 
-## Available XML Attributes
+---
 
-Here are the customizable attributes you can use in XML:
+## Customization
 
-| Attribute         | Description                                   | Type     |
-|-------------------|-----------------------------------------------|----------|
-| `max`             | Maximum progress value                        | Integer  |
-| `progress`        | Current progress value                        | Integer  |
-| `frontColor`      | Color of the front wave                       | Color    |
-| `behindColor`     | Color of the behind wave                      | Color    |
-| `borderColor`     | Color of the border                           | Color    |
-| `textColor`       | Color of the text                            | Color    |
-| `borderWidthSize` | Width of the border                           | Dimension|
-| `strong`          | Wave strength                                 | Integer  |
-| `animatorEnable`  | Enable/disable animation                      | Boolean  |
-| `shapeType`       | Shape of the wave container                   | Enum     |
-| `textHidden`      | Hide or show the text                        | Boolean  |
-| `shapePadding`    | Padding around the shape                      | Dimension|
+Common APIs:
 
+| API | Purpose |
+|-----|---------|
+| `setShape(ShapeType)` / `setShape(WaterWaveView.Shape)` | Clip shape |
+| `setProgress(int)` | Current fill level |
+| `setMax(int)` | Maximum for progress & label |
+| `setFrontWaveColor(int)` | Front wave color |
+| `setBehindWaveColor(int)` | Rear wave color |
+| `setBorderColor(int)` | Outline color |
+| `setBorderWidth(float)` | Outline stroke width |
+| `setWaveStrong(int)` | Wave crest strength (0–100 style scale) |
+| `setWaveSpeed(float)` | Phase delta per animation tick |
+| `setWaveOffset(int)` | Front/back wave phase separation |
+| `startAnimation()` / `stopAnimation()` | Run or stop wave motion |
 
-## Key Methods
+Also useful: `setWaveType(WaveType)`, `setWaveAmplitude(float)`, `setCornerRadius(float)`, `setShapePadding(float)`, `setAnimationSpeed(int)`, `setThirdWaveLayerEnabled(boolean)`, `setHideText(boolean)`, `setStarSpikes(int)`.
 
-Here are the methods available to interact with the Water Wave View:
+---
 
-| Method                        | Description                                | Return Type |
-|-------------------------------|--------------------------------------------|-------------|
-| `startAnimation()`            | Starts the wave animation                   | void        |
-| `stopAnimation()`             | Stops the wave animation                    | void        |
-| `setWaveVector(float offset)` | Sets the wave vector offset                 | void        |
-| `setWaveOffset(int offset)`   | Sets the wave animation offset              | void        |
-| `setShape(Shape shape)`       | Changes the shape of the wave container     | void        |
-| `setHideText(boolean hidden)`  | Hides or shows the text                     | void        |
-| `setStarSpikes(int count)`    | Sets the number of spikes for star shape    | void        |
-| `setBorderWidth(float width)`  | Sets the width of the border                | void        |
-| `setShapePadding(float padding)`| Sets padding around the shape               | void        |
-| `setWaveStrong(int strong)`    | Sets the strength of the waves              | void        |
+## XML Attributes
 
+| Attribute | Description |
+|-----------|-------------|
+| `app:progress` | Current progress value |
+| `app:max` | Maximum progress value |
+| `app:frontColor` | Front wave color |
+| `app:behideColor` | Rear (“behind”) wave color |
+| `app:borderColor` | Border color |
+| `app:borderWidthSize` | Border stroke width |
+| `app:strong` | Wave strength |
+| `app:shapeType` | Shape enum (see [Available Shapes](#available-shapes)) |
+| `app:animatorEnable` | Start with animation enabled |
+| `app:textColor` | Percent label color |
+| `app:textHidden` | Hide the center label |
+| `app:shapePadding` | Extra inset around the shape |
 
-## Screenshots
+---
 
-![alt text](https://github.com/orbitalsonic/Sonic-Water-Wave-Animation/blob/master/Screenshots/screengif.gif?raw=true)
+## Sample Demo
 
-# LICENSE
+The **`app`** module is an interactive showcase:
+
+- Large **preview** `WaterWaveView`
+- **SeekBars** for water level (0–100) and wave strength
+- **Switch** to start/stop animation
+- **RecyclerView** grid (3 columns) for **all shapes** with selection highlight and tap-to-apply
+
+Open the project in Android Studio and run the **`app`** configuration to try it.
+
+---
+
+## Architecture
+
+- **Shape system** — `ShapeType` + `ShapeGenerator` implementations in `shape.impl`, resolved via `ShapeFactory`. `ShapeRenderer` builds border/content paths and clips the canvas for the liquid region.
+- **Wave engine** — `WaveRenderer` draws stacked wave **paths** inside the clip. `WaveMath` / `WaveType` define waveform sampling (sine, triangle, sharp, noise).
+- **Animation** — `WaveAnimationController` steps phase on the main thread with `ValueAnimator`.
+
+---
+
+## Performance Notes
+
+- Wave fill uses **vector paths** (no full-size bitmap shader per frame).
+- Shape paths are **rebuilt** when size, padding, border, or shape type changes—not every frame.
+- Suitable for **lists and dashboards** when used at reasonable sizes; prefer `hardwareLayer` only if you profile a specific clipping need on older APIs.
+
+---
+
+## License
 
 Copyright 2021 Muhammad Yaqoob
 
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
+Licensed under the **Apache License, Version 2.0** (the “License”); you may not use this file except in compliance with the License. You may obtain a copy of the License at:
 
-    http://www.apache.org/licenses/LICENSE-2.0
+https://www.apache.org/licenses/LICENSE-2.0
 
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
+Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an **“AS IS” BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND**, either express or implied. See the License for the specific language governing permissions and limitations under the License.
+
+---
+
+## Author
+
+**Orbitalsonic**

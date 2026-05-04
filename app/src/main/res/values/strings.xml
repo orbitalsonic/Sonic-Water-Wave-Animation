@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">Water Wave Animation</string>
+    <string name="label_water_level">Water level</string>
+    <string name="label_wave_strength">Wave strength</string>
+    <string name="label_wave_animation">Wave animation</string>
+    <string name="label_wave_type">Wave type</string>
+    <string name="label_shapes">Shapes</string>
+    <string name="content_desc_shape_icon">Shape icon</string>
+    <string name="water_level_percent">%d%%</string>
 </resources>

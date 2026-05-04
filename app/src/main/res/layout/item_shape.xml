@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="6dp"
+    android:clickable="true"
+    android:focusable="true"
+    app:cardBackgroundColor="@color/shape_item_background"
+    app:cardCornerRadius="14dp"
+    app:cardElevation="2dp"
+    app:strokeColor="@color/shape_item_stroke_selected"
+    app:strokeWidth="0dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:minHeight="88dp"
+        android:orientation="vertical"
+        android:paddingHorizontal="8dp"
+        android:paddingVertical="12dp">
+
+        <ImageView
+            android:id="@+id/imageShapeIcon"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:contentDescription="@string/content_desc_shape_icon"
+            app:tint="?attr/colorPrimary"
+            tools:src="@drawable/ic_baseline_circle_24" />
+
+        <TextView
+            android:id="@+id/textShapeName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:gravity="center"
+            android:maxLines="2"
+            android:textAppearance="?attr/textAppearanceLabelMedium"
+            tools:text="Circle" />
+    </LinearLayout>
+</com.google.android.material.card.MaterialCardView>

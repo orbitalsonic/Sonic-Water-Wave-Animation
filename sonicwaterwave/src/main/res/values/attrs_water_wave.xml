@@ -10,6 +10,9 @@
         <enum name="rectangle" value="7" />
         <enum name="triangle" value="8" />
         <enum name="diamond" value="9" />
+        <enum name="rounded_rectangle" value="10" />
+        <enum name="capsule" value="11" />
+        <enum name="blob" value="12" />
     </attr>
     <attr name="progress" format="integer" />
     <attr name="max" format="integer" />
