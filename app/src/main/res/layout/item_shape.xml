@@ -4,11 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="6dp"
+    android:layout_margin="8dp"
     android:clickable="true"
     android:focusable="true"
     app:cardBackgroundColor="@color/shape_item_background"
-    app:cardCornerRadius="12dp"
+    app:cardCornerRadius="14dp"
     app:cardElevation="2dp"
     app:strokeColor="@color/shape_item_stroke_selected"
     app:strokeWidth="0dp">
@@ -17,15 +17,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
-        android:minHeight="88dp"
+        android:minHeight="104dp"
         android:orientation="vertical"
-        android:paddingHorizontal="8dp"
-        android:paddingVertical="12dp">
+        android:paddingHorizontal="12dp"
+        android:paddingVertical="14dp">
 
         <ImageView
             android:id="@+id/imageShapeIcon"
-            android:layout_width="36dp"
-            android:layout_height="36dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:contentDescription="@string/content_desc_shape_icon"
             app:tint="?attr/colorPrimary"
             tools:src="@drawable/ic_baseline_circle_24" />
@@ -34,10 +34,11 @@
             android:id="@+id/textShapeName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="6dp"
+            android:layout_marginTop="8dp"
             android:gravity="center"
             android:maxLines="2"
-            android:textAppearance="?attr/textAppearanceLabelMedium"
+            android:textAppearance="?attr/textAppearanceLabelLarge"
+            android:textSize="14sp"
             tools:text="Circle" />
     </LinearLayout>
 </com.google.android.material.card.MaterialCardView>

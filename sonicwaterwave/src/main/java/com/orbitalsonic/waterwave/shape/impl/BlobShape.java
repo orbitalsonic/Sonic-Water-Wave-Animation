@@ -14,25 +14,29 @@ public final class BlobShape implements ShapeGenerator {
 
     @Override
     public void appendShape(Path path, ShapeDimensions d) {
-        float pad = d.shapePadding;
-        float bw = d.borderWidth;
-        float size = d.minSide() - pad;
-        if (d.contentMode) {
-            size -= 2f * bw;
+        float inset = d.shapePadding + d.borderWidth;
+        float left = inset;
+        float top = inset;
+        float right = d.viewWidth - inset;
+        float bottom = d.viewHeight - inset;
+        if (right <= left || bottom <= top) {
+            return;
         }
-        size = Math.max(1f, size);
-        float cx = d.viewWidth / 2f;
-        float cy = d.viewHeight / 2f;
-        float baseR = size * 0.48f;
+
+        float w = right - left;
+        float h = bottom - top;
+        float cx = (left + right) / 2f;
+        float cy = (top + bottom) / 2f;
+        float baseR = Math.min(w, h) * 0.40f;
 
         float[] px = new float[POINTS];
         float[] py = new float[POINTS];
         for (int i = 0; i < POINTS; i++) {
             double ang = -Math.PI / 2d + (2 * Math.PI * i) / POINTS;
-            float wobble = 1f + 0.2f * (float) Math.sin(ang * 3d + 0.6f);
+            float wobble = 1f + 0.14f * (float) Math.sin(ang * 3d + 0.6f);
             float r = baseR * wobble;
-            px[i] = cx + (float) Math.cos(ang) * r;
-            py[i] = cy + (float) Math.sin(ang) * r;
+            px[i] = clamp(cx + (float) Math.cos(ang) * r, left, right);
+            py[i] = clamp(cy + (float) Math.sin(ang) * r, top, bottom);
         }
 
         path.moveTo(px[0], py[0]);
@@ -45,5 +49,9 @@ public final class BlobShape implements ShapeGenerator {
             path.cubicTo(c1x, c1y, c2x, c2y, px[ni], py[ni]);
         }
         path.close();
+    }
+
+    private float clamp(float value, float min, float max) {
+        return Math.max(min, Math.min(max, value));
     }
 }

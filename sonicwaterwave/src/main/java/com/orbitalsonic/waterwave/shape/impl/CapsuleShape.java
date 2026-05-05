@@ -10,22 +10,17 @@ public final class CapsuleShape implements ShapeGenerator {
 
     @Override
     public void appendShape(Path path, ShapeDimensions d) {
-        float pad = d.shapePadding;
-        float bw = d.borderWidth;
-        float w = d.viewWidth - pad;
-        float h = d.viewHeight - pad;
-        float left = (d.viewWidth - w) / 2f;
-        float top = (d.viewHeight - h) / 2f;
-        if (d.contentMode) {
-            left += bw;
-            top += bw;
-            w -= 2f * bw;
-            h -= 2f * bw;
+        float inset = d.shapePadding + d.borderWidth;
+        float left = inset;
+        float top = inset;
+        float right = d.viewWidth - inset;
+        float bottom = d.viewHeight - inset;
+        if (right <= left || bottom <= top) {
+            return;
         }
-        w = Math.max(1f, w);
-        h = Math.max(1f, h);
-        float rx = Math.min(w, h) / 2f;
-        RectF r = new RectF(left, top, left + w, top + h);
-        path.addRoundRect(r, rx, rx, Path.Direction.CCW);
+
+        RectF r = new RectF(left, top, right, bottom);
+        float cornerRadius = r.height() / 2f;
+        path.addRoundRect(r, cornerRadius, cornerRadius, Path.Direction.CCW);
     }
 }
