@@ -10,50 +10,53 @@ import com.orbitalsonic.waterwave.shape.model.ShapeDimensions;
  */
 public final class GlassShape implements ShapeGenerator {
 
-    private static final float TOP_BOW = 0.06f;
-    private static final float SIDE_INSET = 0.07f;
-    private static final float GLASS_WALL = 0.04f;
+    private static final float TOP_WIDTH_RATIO = 0.80f;
+    private static final float BOTTOM_WIDTH_RATIO = 0.62f;
+    private static final float TOP_RIM_DIP_RATIO = 0.03f;
+    private static final float SIDE_BULGE_RATIO = 0.055f;
+    private static final float SIDE_NECK_IN_RATIO = 0.035f;
 
     @Override
     public void appendShape(Path path, ShapeDimensions d) {
-        float pad = d.shapePadding;
-        float bw = d.borderWidth;
-        float w = d.viewWidth - pad;
-        float h = d.viewHeight - pad;
-        float left = (d.viewWidth - w) / 2f;
-        float top = (d.viewHeight - h) / 2f;
-
-        float wall = d.contentMode ? Math.max(bw, w * GLASS_WALL) : 0f;
-        if (d.contentMode) {
-            left += wall;
-            top += wall;
-            w -= 2f * wall;
-            h -= 2f * wall;
+        float inset = d.shapePadding + d.borderWidth;
+        float left = inset;
+        float top = inset;
+        float right = d.viewWidth - inset;
+        float bottom = d.viewHeight - inset;
+        if (right <= left || bottom <= top) {
+            return;
         }
 
-        float midX = left + w / 2f;
-        float topInset = w * (0.12f - SIDE_INSET * 0.5f);
-        float bottomInset = w * (0.18f + SIDE_INSET);
-        float xTl = left + topInset;
-        float xTr = left + w - topInset;
-        float xBl = left + bottomInset;
-        float xBr = left + w - bottomInset;
-        float yTop = top + bw * 0.5f;
-        float yBot = top + h - bw * 0.5f;
-        float rimDip = w * TOP_BOW;
+        float safeWidth = right - left;
+        float safeHeight = bottom - top;
+        float centerX = (left + right) / 2f;
 
-        path.moveTo(xTl, yTop);
-        path.quadTo(midX, yTop + rimDip, xTr, yTop);
+        float topHalfWidth = safeWidth * TOP_WIDTH_RATIO * 0.5f;
+        float bottomHalfWidth = safeWidth * BOTTOM_WIDTH_RATIO * 0.5f;
+        float topY = top + safeHeight * 0.05f;
+        float bottomY = bottom - safeHeight * 0.02f;
+        float rimDip = safeHeight * TOP_RIM_DIP_RATIO;
+        float sideBulge = safeWidth * SIDE_BULGE_RATIO;
+        float sideNeckIn = safeWidth * SIDE_NECK_IN_RATIO;
+
+        float xTl = centerX - topHalfWidth;
+        float xTr = centerX + topHalfWidth;
+        float xBl = centerX - bottomHalfWidth;
+        float xBr = centerX + bottomHalfWidth;
+        float yMid = topY + (bottomY - topY) * 0.45f;
+
+        path.moveTo(xTl, topY);
+        path.quadTo(centerX, topY + rimDip, xTr, topY);
         path.cubicTo(
-                xTr + w * 0.02f, top + h * 0.35f,
-                xBr + w * 0.015f, yBot - h * 0.08f,
-                xBr, yBot
+                xTr + sideBulge, yMid,
+                xBr + sideNeckIn, bottomY - safeHeight * 0.18f,
+                xBr, bottomY
         );
-        path.lineTo(xBl, yBot);
+        path.lineTo(xBl, bottomY);
         path.cubicTo(
-                xBl - w * 0.015f, yBot - h * 0.08f,
-                xTl - w * 0.02f, top + h * 0.35f,
-                xTl, yTop
+                xBl - sideNeckIn, bottomY - safeHeight * 0.18f,
+                xTl - sideBulge, yMid,
+                xTl, topY
         );
         path.close();
     }
