@@ -79,7 +79,7 @@ waterWaveView.setWaveType(WaveType.SINE)
 
 ---
 
-## Setup
+## Installation
 
 ### Step 1: Add Maven Repository
 Add the following to your project-level build script (`build.gradle` or `settings.gradle`) for **Groovy** or **Kotlin DSL**:
