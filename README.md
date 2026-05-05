@@ -4,17 +4,11 @@
 
 **Android custom view** library: **animated water waves** clipped to **multiple shapes**, with **several wave formulas**, full **color / border / progress** control, and a **path-based** renderer suitable for production apps.
 
-**Repository:** [github.com/orbitalsonic/Sonic-Water-Wave-Animation](https://github.com/orbitalsonic/Sonic-Water-Wave-Animation)
-
 ---
 
 ## Preview
 
-> Add your own GIF/screenshots to the repo and point these links at them.
-
-![Animated preview](preview.gif)
-
-![Shape & wave demo](preview-shapes.png)
+here is preview
 
 ---
 
@@ -78,8 +72,6 @@ public enum WaveType {
 **Kotlin usage:**
 
 ```kotlin
-import com.orbitalsonic.waterwave.wave.WaveType
-
 waterWaveView.setWaveType(WaveType.SINE)
 ```
 
@@ -87,34 +79,45 @@ waterWaveView.setWaveType(WaveType.SINE)
 
 ---
 
-## Installation
+## Setup
 
-### Option 1: Local module
+### Step 1: Add Maven Repository
+Add the following to your project-level build script (`build.gradle` or `settings.gradle`) for **Groovy** or **Kotlin DSL**:
 
-```gradle
-// settings.gradle
-include ':app', ':sonicwaterwave'
-```
-
-```gradle
-// app/build.gradle
-dependencies {
-    implementation project(':sonicwaterwave')
+#### Groovy DSL
+```groovy
+repositories {
+   google()
+   mavenCentral()
+   maven { url "https://jitpack.io" }
 }
 ```
 
-### Option 2: JitPack
-
-1. Add [JitPack](https://jitpack.io) to your repositories.
-2. In `app/build.gradle`:
-
-```gradle
-dependencies {
-    implementation 'com.github.orbitalsonic:Sonic-Water-Wave-Animation:<version>'
+#### Kotlin DSL
+```kotlin
+repositories {
+    google()
+    mavenCentral()
+    maven { setUrl("https://jitpack.io") }
 }
 ```
 
-Use a real tag or commit from [JitPack](https://jitpack.io/#orbitalsonic/Sonic-Water-Wave-Animation).
+### Step 2: Add Dependency
+Include the Sonic-Water-Wave-Animation library in your app-level build script (`build.gradle` or `build.gradle.kts`). Replace `x.x.x` with the latest version: [![](https://jitpack.io/v/orbitalsonic/Sonic-Water-Wave-Animation.svg)](https://jitpack.io/#orbitalsonic/Sonic-Water-Wave-Animation)
+
+
+#### Groovy DSL
+```groovy
+implementation 'com.github.orbitalsonic:Sonic-Water-Wave-Animation:x.x.x'
+```
+
+#### Kotlin DSL
+```kotlin
+implementation("com.github.orbitalsonic:Sonic-Water-Wave-Animation:x.x.x")
+```
+
+### Step 3: Sync Gradle
+Sync your Gradle project to fetch the dependency.
 
 ---
 
@@ -125,14 +128,23 @@ Use a real tag or commit from [JitPack](https://jitpack.io/#orbitalsonic/Sonic-W
 Canonical class (recommended):
 
 ```xml
-<com.orbitalsonic.waterwave.view.WaterWaveView
+ <com.orbitalsonic.waterwave.view.WaterWaveView
     android:id="@+id/waterWaveView"
-    android:layout_width="200dp"
-    android:layout_height="200dp"
+    android:layout_width="match_parent"
+    android:layout_height="240dp"
+    android:layout_margin="12dp"
+    app:animatorEnable="false"
+    app:behideColor="#90cbf9"
+    app:borderColor="#2196F3"
+    app:borderWidthSize="4dp"
+    app:frontColor="#80c5fc"
     app:max="100"
-    app:progress="50"
+    app:progress="30"
+    app:shapePadding="12dp"
     app:shapeType="circle"
-    app:animatorEnable="true" />
+    app:strong="80"
+    app:textColor="#018786"
+    app:textHidden="false" />
 ```
 
 **Compatibility:** `com.orbitalsonic.waterwave.WaterWaveView` is a thin subclass of the view above—existing layouts keep working.
@@ -140,16 +152,11 @@ Canonical class (recommended):
 ### Kotlin
 
 ```kotlin
-import com.orbitalsonic.waterwave.view.WaterWaveView
-import com.orbitalsonic.waterwave.shape.ShapeType
-import com.orbitalsonic.waterwave.wave.WaveType
-
 waterWaveView.setMax(100)
 waterWaveView.setProgress(50)
 waterWaveView.setShape(ShapeType.CIRCLE)
 waterWaveView.setWaveType(WaveType.SINE)
 waterWaveView.startAnimation()
-// …
 waterWaveView.stopAnimation()
 ```
 
@@ -160,8 +167,6 @@ waterWaveView.setListener { progress, max ->
     // onStuffing(progress, max)
 }
 ```
-
-Use `com.orbitalsonic.waterwave.listener.OnWaveStuffListener` (or the deprecated root `com.orbitalsonic.waterwave.OnWaveStuffListener`, which extends it).
 
 ---
 
@@ -285,8 +290,6 @@ Run the **`app`** configuration in Android Studio to try it.
 | **`animation`** | `WaveAnimationController` — tick / speed / start / stop |
 | **`view`** | `WaterWaveView` — orchestration only |
 
-Root **`com.orbitalsonic.waterwave.WaterWaveView`** subclasses **`view.WaterWaveView`** for backward-compatible FQCNs.
-
 ---
 
 ## Performance notes
@@ -297,15 +300,25 @@ Root **`com.orbitalsonic.waterwave.WaterWaveView`** subclasses **`view.WaterWave
 
 ---
 
-## License
-
-Copyright 2021 Muhammad Yaqoob
-
-Licensed under the **Apache License, Version 2.0**.  
-Full text: [https://www.apache.org/licenses/LICENSE-2.0](https://www.apache.org/licenses/LICENSE-2.0)
+## Contributing
+Contributions are welcome! Fork the repository, make changes, and submit a pull request.
 
 ---
 
-## Author
+## License
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
 
-**Orbitalsonic**
+Copyright OrbitalSonic
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
